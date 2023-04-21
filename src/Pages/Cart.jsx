@@ -1,11 +1,15 @@
 import Layout from "../Layout/Layout";
+import { useCart } from "../Providers/CartProvider";
 
 const Cart = () => {
+  const {cart} = useCart();
   return (
     <Layout>
-      <main>
-        <h2>Cart page is fucking here</h2>
-      </main>
+      <main>{cart.length ? cart.map(item => (
+        <div key={item.id}>
+          <p>{item.name}</p>
+        </div>
+      )) : <p>No Item in Cart</p>}</main>
     </Layout>
   );
 };
