@@ -3,7 +3,9 @@ import Layout from "../Layout/Layout";
 const Cart = () => {
   return (
     <Layout>
-      <h2>Cart Page is fucking here</h2>
+      <main>
+        <h2>Cart page is fucking here</h2>
+      </main>
     </Layout>
   );
 };

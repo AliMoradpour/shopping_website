@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.productList {
+  display: grid;
+  border-radius: 5px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-row-gap: 5rem;
+  grid-column-gap: 5rem;
+  max-width: 1170px;
+  width: 90vw;
+  margin-top: 20px;
+}
+.product {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(128, 175, 245);
+}
+.productImg img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.productInfo {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
