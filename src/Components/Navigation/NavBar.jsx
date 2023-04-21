@@ -5,11 +5,9 @@ import "./navbar.css";
 const NavBar = () => {
   return (
     <nav>
-      <div>
+      <div onClick={() => window.scrollTo(0, 0)}>
         <img src={logo} alt="Shopping Center Logo" />
-        <p>
-          AliMoradpour <span> | Shopping Center</span>
-        </p>
+        <p>Shopping Center</p>
       </div>
       <ul>
         <li>

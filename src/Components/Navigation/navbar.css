@@ -13,10 +13,11 @@ nav div img {
 nav div  {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 nav div p {
-    font-size: 20px;
-    font-weight: bold;
+    border-left: 1px solid #6d28d9;
+    padding-left: 6px;
 }
 nav ul {
     display: flex;
