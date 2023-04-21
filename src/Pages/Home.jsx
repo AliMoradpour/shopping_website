@@ -1,9 +1,11 @@
 import Layout from "../Layout/Layout";
+import { useCartActions } from "../Providers/CartProvider";
 import * as data from "../Services/data";
 
 const Home = () => {
+  const dispatch = useCartActions();
   const addProductHandler = (product) => {
-    console.log(product);
+    dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
   return (
@@ -18,7 +20,9 @@ const Home = () => {
               <div className="productInfo">
                 <p>{item.name}</p>
                 <p>${item.price}</p>
-                <button onClick={() => addProductHandler(product)} className="btn primary">
+                <button
+                  onClick={() => addProductHandler(item)}
+                  className="btn primary">
                   Add to Cart
                 </button>
               </div>
