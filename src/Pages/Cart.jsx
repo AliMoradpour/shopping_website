@@ -3,7 +3,7 @@ import { useCart, useCartActions } from "../Providers/CartProvider";
 import "./cartPage.css";
 
 const Cart = () => {
-  const { cart } = useCart();
+  const { cart , total } = useCart();
   const dispatch = useCartActions();
 
   if (!cart.length) {
@@ -48,7 +48,10 @@ const Cart = () => {
               </div>
             ))}
           </section>
-          <section className="cartSummery">cart summery</section>
+          <section className="cartSummery">
+            <h2>Cart summery</h2>
+            <div>Total Price is : {total} $</div>
+          </section>
         </section>
       </main>
     </Layout>
