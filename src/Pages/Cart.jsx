@@ -1,20 +1,27 @@
 import Layout from "../Layout/Layout";
-import { useCart } from "../Providers/CartProvider";
+import { useCart, useCartActions } from "../Providers/CartProvider";
 import "./cartPage.css";
 
 const Cart = () => {
   const { cart } = useCart();
+  const dispatch = useCartActions();
 
   if (!cart.length) {
     return (
       <Layout>
-        <main>
+        <main className="container">
           <h2>Cart is Empty !</h2>
         </main>
       </Layout>
     );
   }
 
+  const incHandler = (cartItem) => {
+    dispatch({ type: "ADD_TO_CART", payload: cartItem });
+  };
+  const decHandler = (cartItem) => {
+    dispatch({ type: "REMOVE_PRODUCT", payload: cartItem });
+  };
   return (
     <Layout>
       <main className="container">
@@ -28,9 +35,15 @@ const Cart = () => {
                 <div>{item.name}</div>
                 <div>$ {item.price * item.quantity}</div>
                 <div className="cartBtns">
-                  <button className="btn primary">Add</button>
+                  <button
+                    className="btn primary"
+                    onClick={() => incHandler(item)}>
+                    Add
+                  </button>
                   <div>{item.quantity}</div>
-                  <button className="btn">Remove</button>
+                  <button className="btn" onClick={() => decHandler(item)}>
+                    Remove
+                  </button>
                 </div>
               </div>
             ))}
