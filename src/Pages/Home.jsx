@@ -1,10 +1,14 @@
 import Layout from "../Layout/Layout";
-import { useCartActions } from "../Providers/CartProvider";
+import { useCart, useCartActions } from "../Providers/CartProvider";
 import * as data from "../Services/data";
+import { checkInCart } from "../utils/checkInCart";
+import {toast } from "react-toastify";
 
 const Home = () => {
+  const { cart } = useCart();
   const dispatch = useCartActions();
   const addProductHandler = (product) => {
+    toast.success(`" ${product.name} " added To Cart`)
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
@@ -23,7 +27,7 @@ const Home = () => {
                 <button
                   onClick={() => addProductHandler(item)}
                   className="btn primary">
-                  Add to Cart
+                  {checkInCart(cart, item) ? "In Cart" : "Add to Cart"}
                 </button>
               </div>
             </div>
