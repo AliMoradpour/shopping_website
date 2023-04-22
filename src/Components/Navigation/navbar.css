@@ -32,8 +32,24 @@ nav ul li a {
     border-radius: 5px;
     color: #000;
     transition: all ease-in .13s;
+    position: relative;
 }
 nav ul li a:hover , .activeLink{
     background-color: #6d28d9;
     color: #fff;
+}
+nav span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding-top: 3px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    font-size: 11px;
+    position: absolute;
+    top: -8px;
+    right: 0;
 }
