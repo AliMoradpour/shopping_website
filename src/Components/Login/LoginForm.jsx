@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../common/Input";
 import "../../common/input.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { loginUser } from "../../Services/loginService";
 import { toast } from "react-toastify";
 import axios from "axios";
@@ -26,16 +26,17 @@ const initialValues = {
   password: "",
 };
 
-const LoginForm = () => {
+const LoginForm = ({ history }) => {
   const [error, setError] = useState(null);
 
   const onSubmit = async (values) => {
     try {
-      const {data} = await loginUser(values);
+      const { data } = await loginUser(values);
       if (!error) {
-        toast.success(`Wellcome Back ${data.name} ❤️`);
+        toast.success(`Wellcome Back ${data.name} ❤️`, {theme: "colored"});
       }
       setError(null);
+      history.push("/");
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
@@ -79,4 +80,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);
