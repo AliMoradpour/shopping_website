@@ -4,6 +4,9 @@ import * as Yup from "yup";
 import Input from "../../common/Input";
 import "../../common/input.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { loginUser } from "../../Services/loginService";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -23,10 +26,24 @@ const initialValues = {
   password: "",
 };
 
-const onSubmit = (values) => {
-  console.log(values);
-};
 const LoginForm = () => {
+  const [error, setError] = useState(null);
+
+  const onSubmit = async (values) => {
+    try {
+      const {data} = await loginUser(values);
+      if (!error) {
+        toast.success(`Wellcome Back ${data.name} ❤️`);
+      }
+      setError(null);
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+        toast.error(`${error.response.data.message}`);
+      }
+    }
+  };
+
   const [formValues, setFormValues] = useState(null);
 
   const formik = useFormik({

@@ -51,8 +51,9 @@ const SignupForm = () => {
     try {
       await signupUser(userData);
       if(!error){
-        toast.success(`Wellcome To Crew Dear " ${userData.name} "`)
+        toast.success(`Wellcome " ${userData.name} " ❤️`)
       }
+      setError(null)
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
