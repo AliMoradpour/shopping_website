@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import Input from "../../common/Input";
 import "../../common/input.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { signupUser } from "../../Services/signupService";
+import { toast } from "react-toastify";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -12,7 +14,7 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email format")
     .required("Email is Required"),
-  number: Yup.string()
+    phoneNumber: Yup.string()
     .required("Phone Number is Required")
     .matches(/^[0-9]{11}$/, "Invalid Phone Number")
     .nullable(),
@@ -31,15 +33,34 @@ const validationSchema = Yup.object({
 const initialValues = {
   name: "",
   email: "",
-  number: "",
+  phoneNumber: "",
   password: "",
   passwordConfirm: "",
 };
 
-const onSubmit = (values) => {
-  console.log(values);
-};
 const SignupForm = () => {
+  const [error, setError] = useState(null);
+  const onSubmit = async (values) => {
+    const { name, email, password, phoneNumber } = values;
+    const userData = {
+      name,
+      email,
+      phoneNumber,
+      password,
+    };
+    try {
+      await signupUser(userData);
+      if(!error){
+        toast.success(`Wellcome To Crew Dear " ${userData.name} "`)
+      }
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        setError(error.response.data.message);
+        toast.error(`${error.response.data.message}`)
+      }
+    }
+  };
+
   const [formValues, setFormValues] = useState(null);
 
   const formik = useFormik({
@@ -55,7 +76,7 @@ const SignupForm = () => {
       <form onSubmit={formik.handleSubmit}>
         <Input label="Name" name="name" formik={formik} />
         <Input label="Email" name="email" formik={formik} type="email" />
-        <Input label="Phone Number" name="number" formik={formik} type="tel" />
+        <Input label="Phone Number" name="phoneNumber" formik={formik} type="tel" />
         <Input
           label="Password"
           name="password"
