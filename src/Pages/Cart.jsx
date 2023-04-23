@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Layout from "../Layout/Layout";
 import { useCart, useCartActions } from "../Providers/CartProvider";
-import "./cartPage.css";
+import "./css/cartPage.css";
 
 const CartSummery = ({ cart, total }) => {
   const originalTotalPrice = cart.length
