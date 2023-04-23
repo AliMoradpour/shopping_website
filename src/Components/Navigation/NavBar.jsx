@@ -5,10 +5,9 @@ import { useCart } from "../../Providers/CartProvider";
 
 const NavBar = () => {
   const { cart } = useCart();
-
   return (
     <nav>
-      <div onClick={() => window.scrollTo(0, 0)}>
+      <div>
         <img src={logo} alt="Shopping Center Logo" />
         <p>Shopping Center</p>
       </div>
@@ -25,6 +24,12 @@ const NavBar = () => {
           </NavLink>
         </li>
       </ul>
+
+      <div className="loginBtn">
+        <NavLink to="/login">Login</NavLink>
+        <div>/</div>
+        <NavLink to="/signup">Signup</NavLink>
+      </div>
     </nav>
   );
 };
