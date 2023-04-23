@@ -1,11 +1,14 @@
 import Layout from "../Layout/Layout";
+import LoginForm from "../Components/Login/Login";
 
 const Login = () => {
-    return ( 
-        <Layout>
-            <h2>Login Page</h2>
-        </Layout>
-     );
-}
- 
+  return (
+    <Layout>
+      <main className="container">
+        <LoginForm />
+      </main>
+    </Layout>
+  );
+};
+
 export default Login;

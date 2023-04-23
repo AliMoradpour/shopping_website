@@ -37,3 +37,8 @@ input:focus {
   opacity: 40%;
   cursor: not-allowed;
 }
+.account{
+  margin-top: 20px;
+  font-size: 13px;
+  color: #444;
+}

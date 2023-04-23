@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import Input from "../common/Input";
-import "../common/input.css";
+import Input from "../../common/Input";
+import "../../common/input.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -25,7 +26,7 @@ const initialValues = {
 const onSubmit = (values) => {
   console.log(values);
 };
-const SignupForm = () => {
+const LoginForm = () => {
   const [formValues, setFormValues] = useState(null);
 
   const formik = useFormik({
@@ -51,11 +52,14 @@ const SignupForm = () => {
           style={{ width: "100%" }}
           className={!formik.isValid ? "disabled btn" : "btn primary"}
           disabled={!formik.isValid}>
-          Submit
+          Login
         </button>
+        <Link to="/signup">
+          <p className="account">Create Account</p>
+        </Link>
       </form>
     </div>
   );
 };
 
-export default SignupForm;
+export default LoginForm;
