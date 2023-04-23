@@ -1,7 +1,7 @@
 .cartCenter {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   width: 90vw;
   max-width: 1170px;
   margin-top: 50px;
@@ -45,9 +45,34 @@
 .cartItem .cartBtns {
   display: flex;
   flex-direction: row-reverse;
-  padding: 10px;
   align-items: center;
+  margin-right: 20px;
 }
-.cartItem .cartBtns button {
-  margin: 10px;
+.cartBtns button:first-child {
+  border-radius: 0 5px 5px 0;
 }
+.cartBtns button:last-child {
+  border-radius: 5px 0 0 5px;
+}
+.cartBtns button:nth-child(2) {
+  border-left: 0;
+  border-right: 0;
+}
+.summeryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.summerySection hr {
+  height: 1px;
+  color: #ccc;
+}
+.cartBtns button {
+  outline: none;
+  color: #6d28d9;
+  border: 1px solid #6d28d9;
+  padding: 5px 10px;
+  background-color: #fff;
+}
+
