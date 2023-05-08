@@ -3,38 +3,6 @@ import Layout from "../Layout/Layout";
 import { useCart, useCartActions } from "../Providers/CartProvider";
 import "./css/cartPage.css";
 
-const CartSummery = ({ cart, total }) => {
-  const originalTotalPrice = cart.length
-    ? cart.reduce((acc, curr) => acc + curr.quantity * curr.price, 0)
-    : 0;
-
-  return (
-    <section className="summerySection">
-      <h2 style={{ marginBottom: "30px" }}>Cart summery</h2>
-      <div className="summeryItem">
-        <p>Original Total Price</p>
-        <p>{originalTotalPrice} $</p>
-      </div>
-      <div className="summeryItem">
-        <p>Cart Discount</p>
-        <p>{originalTotalPrice - total} $</p>
-      </div>
-      <hr />
-      <div className="summeryItem">
-        <p>Net Price</p>
-        <p>{total} $</p>
-      </div>
-      <Link to="/checkout">
-        <button
-          className="btn primary"
-          style={{ width: "100%", marginTop: "20px" }}>
-          Go To Checkout
-        </button>
-      </Link>
-    </section>
-  );
-};
-
 const Cart = () => {
   const { cart, total } = useCart();
   const dispatch = useCartActions();
@@ -85,3 +53,34 @@ const Cart = () => {
 };
 
 export default Cart;
+
+const CartSummery = ({ cart, total }) => {
+  const originalTotalPrice = cart.length ? cart.reduce((acc, curr) => acc + curr.quantity * curr.price, 0) : 0;
+
+  return (
+    <section className="summerySection">
+      <h2 style={{ marginBottom: "30px" }}>Cart summery</h2>
+      <div className="summeryItem">
+        <p>Original Total Price</p>
+        <p>{originalTotalPrice} $</p>
+      </div>
+      <div className="summeryItem">
+        <p>Cart Discount</p>
+        <p>{originalTotalPrice - total} $</p>
+      </div>
+      <hr />
+      <div className="summeryItem">
+        <p>Net Price</p>
+        <p>{total} $</p>
+      </div>
+      <Link to="/signup?redirect=checkout">
+        <button
+          className="btn primary"
+          style={{ width: "100%", marginTop: "20px" }}>
+          Go To Checkout
+        </button>
+      </Link>
+    </section>
+  );
+};
+

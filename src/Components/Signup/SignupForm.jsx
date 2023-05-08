@@ -7,6 +7,7 @@ import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { signupUser } from "../../Services/signupService";
 import { toast } from "react-toastify";
 import { useAuthActions } from "../../Providers/AuthProvider";
+import { useQuery } from "../../hooks/useQuery";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -40,6 +41,8 @@ const initialValues = {
 };
 
 const SignupForm = ({ history }) => {
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const setAuth = useAuthActions();
   const [error, setError] = useState(null);
 
@@ -56,12 +59,11 @@ const SignupForm = ({ history }) => {
     try {
       const { data } = await signupUser(userData);
       setAuth(data);
-      // localStorage.setItem("authState", JSON.stringify(data));
       if (!error) {
         toast.success(`Wellcome " ${userData.name} " ❤️`, { theme: "colored" });
       }
       setError(null);
-      history.push("/cart");
+      history.push(redirect);
     } catch (error) {
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
@@ -110,7 +112,7 @@ const SignupForm = ({ history }) => {
           disabled={!formik.isValid}>
           Signup
         </button>
-        <Link to="/login">
+        <Link to={`/login?redirect=${redirect}`}>
           <p className="account">I have Account</p>
         </Link>
       </form>
