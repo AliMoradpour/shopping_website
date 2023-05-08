@@ -13,9 +13,9 @@ import AuthProvider from "./Providers/AuthProvider";
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <AuthProvider>
         <CartProvider>
-          <ToastContainer />
           <Switch>
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />

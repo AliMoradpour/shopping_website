@@ -25,7 +25,11 @@ const CartSummery = ({ cart, total }) => {
         <p>{total} $</p>
       </div>
       <Link to="/checkout">
-      <button className="btn primary" style={{width:'100%' , marginTop:'20px'}}>Go To Checkout</button>
+        <button
+          className="btn primary"
+          style={{ width: "100%", marginTop: "20px" }}>
+          Go To Checkout
+        </button>
       </Link>
     </section>
   );
@@ -64,14 +68,9 @@ const Cart = () => {
                 <div>{item.name}</div>
                 <div>$ {item.offPrice * item.quantity}</div>
                 <div className="cartBtns">
-                  <button
-                    onClick={() => incHandler(item)}>
-                    +
-                  </button>
+                  <button onClick={() => incHandler(item)}>+</button>
                   <button>{item.quantity}</button>
-                  <button onClick={() => decHandler(item)}>
-                    -
-                  </button>
+                  <button onClick={() => decHandler(item)}>-</button>
                 </div>
               </div>
             ))}
