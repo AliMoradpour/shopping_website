@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Input from "../../common/Input";
@@ -6,7 +6,7 @@ import "../../common/input.css";
 import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { signupUser } from "../../Services/signupService";
 import { toast } from "react-toastify";
-import { useAuthActions } from "../../Providers/AuthProvider";
+import { useAuth, useAuthActions } from "../../Providers/AuthProvider";
 import { useQuery } from "../../hooks/useQuery";
 
 const validationSchema = Yup.object({
@@ -45,6 +45,10 @@ const SignupForm = ({ history }) => {
   const redirect = query.get("redirect") || "/";
   const setAuth = useAuthActions();
   const [error, setError] = useState(null);
+  const auth = useAuth();
+  useEffect(() => {
+    if (auth) history.push(redirect);
+  }, [redirect, auth]);
 
   const onSubmit = async (values) => {
     const { name, email, password, phoneNumber } = values;
