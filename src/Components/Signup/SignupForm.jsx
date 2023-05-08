@@ -6,6 +6,7 @@ import "../../common/input.css";
 import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { signupUser } from "../../Services/signupService";
 import { toast } from "react-toastify";
+import { useAuthActions } from "../../Providers/AuthProvider";
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -39,19 +40,25 @@ const initialValues = {
 };
 
 const SignupForm = ({ history }) => {
+  const setAuth = useAuthActions();
   const [error, setError] = useState(null);
+
   const onSubmit = async (values) => {
     const { name, email, password, phoneNumber } = values;
+
     const userData = {
       name,
       email,
       phoneNumber,
       password,
     };
+
     try {
-      await signupUser(userData);
+      const { data } = await signupUser(userData);
+      setAuth(data);
+      localStorage.setItem("authState", JSON.stringify(data));
       if (!error) {
-        toast.success(`Wellcome " ${userData.name} " ❤️` , {theme: "colored"});
+        toast.success(`Wellcome " ${userData.name} " ❤️`, { theme: "colored" });
       }
       setError(null);
       history.push("/cart");

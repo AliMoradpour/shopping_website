@@ -6,7 +6,7 @@ import "../../common/input.css";
 import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { loginUser } from "../../Services/loginService";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { useAuthActions } from "../../Providers/AuthProvider";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -27,13 +27,17 @@ const initialValues = {
 };
 
 const LoginForm = ({ history }) => {
+  const setAuth = useAuthActions();
+
   const [error, setError] = useState(null);
 
   const onSubmit = async (values) => {
     try {
       const { data } = await loginUser(values);
+      setAuth(data);
+      localStorage.setItem("authState", JSON.stringify(data));
       if (!error) {
-        toast.success(`Wellcome Back ${data.name} ❤️`, {theme: "colored"});
+        toast.success(`Wellcome Back ${data.name} ❤️`, { theme: "colored" });
       }
       setError(null);
       history.push("/");
