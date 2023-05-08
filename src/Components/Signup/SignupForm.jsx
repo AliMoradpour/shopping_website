@@ -6,8 +6,12 @@ import "../../common/input.css";
 import { Link, withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { signupUser } from "../../Services/signupService";
 import { toast } from "react-toastify";
+<<<<<<< HEAD
 import { useAuth, useAuthActions } from "../../Providers/AuthProvider";
 import { useQuery } from "../../hooks/useQuery";
+=======
+import { useAuthActions } from "../../Providers/AuthProvider";
+>>>>>>> main
 
 const validationSchema = Yup.object({
   name: Yup.string()
@@ -41,8 +45,11 @@ const initialValues = {
 };
 
 const SignupForm = ({ history }) => {
+<<<<<<< HEAD
   const query = useQuery();
   const redirect = query.get("redirect") || "/";
+=======
+>>>>>>> main
   const setAuth = useAuthActions();
   const [error, setError] = useState(null);
   const auth = useAuth();
@@ -76,10 +83,9 @@ const SignupForm = ({ history }) => {
     }
   };
 
-  const [formValues, setFormValues] = useState(null);
 
   const formik = useFormik({
-    initialValues: formValues || initialValues,
+    initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,

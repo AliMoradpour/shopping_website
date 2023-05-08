@@ -2,12 +2,18 @@ import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo-red.png";
 import { useCart } from "../../Providers/CartProvider";
 import { useAuth } from "../../Providers/AuthProvider";
+<<<<<<< HEAD
 import "./navbar.css";
+=======
+>>>>>>> main
 
 const NavBar = () => {
   const { cart } = useCart();
   const userData = useAuth();
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
   return (
     <nav>
       <div>
@@ -27,6 +33,7 @@ const NavBar = () => {
           </NavLink>
         </li>
       </ul>
+<<<<<<< HEAD
       <div className="loginBtn">
         <NavLink
           to={userData ? "/profile" : "/login"}
@@ -34,6 +41,12 @@ const NavBar = () => {
           {userData ? "Profile" : "Login / Signup"}
         </NavLink>
       </div>
+=======
+
+      <NavBar className="loginBtn" to={userData ? "/profile" : "/login"}>
+        {userData ? "Profile" : "Login / SignUp"}
+      </NavBar>
+>>>>>>> main
     </nav>
   );
 };
